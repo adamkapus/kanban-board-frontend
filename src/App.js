@@ -1,21 +1,17 @@
 import './App.css';
+import React, { useState } from "react";
+import ActivityAdder from "./components/ActivityAdder.js";
+import CategoryManager from "./components/CategoryManager";
 
-function App() {
+function App(props) {
+
+  const [tasks, setTasks] = useState(props.tasks);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="todoapp stack-large">
+      <h1>Teendo kezelo</h1>
+      <ActivityAdder />
+      <CategoryManager tasks={tasks}/>
     </div>
   );
 }
