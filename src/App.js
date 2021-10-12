@@ -6,10 +6,9 @@ import { nanoid } from "nanoid";
 
 
 function App(props) {
-  const jobb = props.tasks.map(task =>{ return {...task, id: "tezt" + nanoid()}});
+  const jobb = props.tasks.map(task =>{ return {...task, id: "teszt" + nanoid()}});
 
   const [tasks, setTasks] = useState(jobb);
-  const [allapot, setAll] = useState("kezdeti");
 
 
 
@@ -28,14 +27,19 @@ function App(props) {
   }
 
   function deleteTask(taskid){
-    setAll(taskid);
     console.log("torolve");
     console.log(taskid);
-}
+  }
+
+  function addTask(name, description, dueDate, category){
+      const newTask = {id: "uj" + nanoid(), name: name, description: description, dueDate: dueDate, category: category };
+      setTasks([...tasks, newTask]);
+
+  }
   return (
     <div >
       <h1>Teendő kezelő {tasks.length}</h1>
-      <ActivityAdder kiir={allapot} />
+      <ActivityAdder addTask={addTask} />
       <CategoryManager tasks={tasks} editTask={editTask} deleteTask={deleteTask}/>
     </div>
   );
