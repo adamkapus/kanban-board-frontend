@@ -6,10 +6,15 @@ import { nanoid } from "nanoid";
 
 
 function App(props) {
-  const jobb = props.tasks.map(task =>{ return {...task, id: "teszt" + nanoid()}});
+  //const jobb = props.tasks.map(task =>{ return {...task, id: "teszt" + nanoid()}});
 
-  const [tasks, setTasks] = useState(jobb);
 
+  let maxId = 0;
+
+  //const preparedData = props.tasks.map(function(task){ maxId++; return {...task, id: maxId}})
+
+  const [tasks, setTasks] = useState(props.tasks);
+  const [maxID, setMaxID] = useState(3); 
 
 
   function editTask(taskid, newName ){
@@ -27,12 +32,22 @@ function App(props) {
   }
 
   function deleteTask(taskid){
-    console.log("torolve");
-    console.log(taskid);
+    const remainingTasks = tasks.filter(task => taskid !== task.id);
+    setTasks(remainingTasks);
   }
 
+  /*function pls(){
+    maxId++;
+    return maxId;
+  }*/
+
   function addTask(name, description, dueDate, category){
-      const newTask = {id: "uj" + nanoid(), name: name, description: description, dueDate: dueDate, category: category };
+    /*console.log("elotte" + maxId);
+      maxId = pls();
+      console.log("utana" + maxId);*/
+      const newID = maxID + 1;
+      setMaxID(newID);
+      const newTask = {id: newID, name: name, description: description, dueDate: dueDate, category: category };
       setTasks([...tasks, newTask]);
 
   }

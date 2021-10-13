@@ -6,7 +6,7 @@ function ActivityAdder(props) {
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newDueDate, setnewDueDate] = useState('');
-  const [newCategory, setnewCategory] = useState('');
+  const [newCategory, setnewCategory] = useState('Függőben');
 
 
   function onNameChanged(e) {
@@ -32,6 +32,9 @@ function ActivityAdder(props) {
     e.preventDefault();
     //props.editTask(props.data.id, newName);
     props.addTask(newName,newDescription,newDueDate, newCategory);
+    setNewName('');
+    setNewDescription('');
+    setnewDueDate('');
     setEditing(false);
     //console.log(newName);
    // setNewName("");
@@ -81,12 +84,12 @@ function ActivityAdder(props) {
       <label htmlFor="category">
         Kategória
       </label>
-      <input
-        id="category"
-        type="text"
-        value={newCategory}
-        onChange={onCategoryChanged}
-      />
+      <select  id="category" value={newCategory} onChange={onCategoryChanged}>
+        <option value="Függőben">Függőben</option>
+        <option value="Folyamatban">Folyamatban</option>
+        <option value="Kész">Kész</option>
+        <option value="Elhalasztva">Elhalasztva</option>
+      </select>
       </p>
 
     
