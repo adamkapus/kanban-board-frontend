@@ -49,7 +49,7 @@ function Item(props) {
   const viewTemplate = (
     <div> 
         <h2 >
-            {props.data.id} {props.data.name}
+            #{props.data.id} {props.data.name}
         </h2>
         <p>{props.data.description}</p>
         <p>{props.data.dueDate}</p>

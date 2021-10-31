@@ -16,6 +16,41 @@ function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const [maxID, setMaxID] = useState(3); 
 
+  /*let adat = {
+    id: 3,
+    name: "ujnve",
+  };*/
+  /*async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response;
+  }*/
+
+  
+  /*let response =  postData(
+    " http://localhost:3100/customers",
+    adat
+  );
+  console.log(response);*/
+
+    /*function initializeData(){
+      fetch(
+        "http://localhost:3100/tasks"
+      ).then(res => res.json())
+      .then( res => {setTasks(res)});
+      //const tasksData =  request.json();
+      //console.log(tasksData);
+      
+    }
+    initializeData();*/
+
+
+
 
   function editTask(taskid, newName ){
     const editedTaskList = tasks.map(task => {
@@ -36,10 +71,7 @@ function App(props) {
     setTasks(remainingTasks);
   }
 
-  /*function pls(){
-    maxId++;
-    return maxId;
-  }*/
+
 
   function addTask(name, description, dueDate, category){
     /*console.log("elotte" + maxId);
@@ -48,6 +80,9 @@ function App(props) {
       const newID = maxID + 1;
       setMaxID(newID);
       const newTask = {id: newID, name: name, description: description, dueDate: dueDate, category: category };
+      
+
+
       setTasks([...tasks, newTask]);
 
   }
