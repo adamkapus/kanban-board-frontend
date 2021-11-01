@@ -52,12 +52,12 @@ function App(props) {
 
 
 
-  function editTask(taskid, newName ){
+  function editTask(taskid, newName, newDescription, newDueDate, newCategory ){
     const editedTaskList = tasks.map(task => {
         if (taskid === task.id) {
           console.log(taskid);
           console.log(newName);
-          return {...task, name: newName}
+          return {...task, name: newName, description : newDescription, dueDate : newDueDate, category : newCategory}
         }
         return task;
       });
@@ -87,7 +87,7 @@ function App(props) {
 
   }
   return (
-    <div >
+    <div class="container-fluid " >
       <h1>Teendő kezelő {tasks.length}</h1>
       <ActivityAdder addTask={addTask} />
       <CategoryManager tasks={tasks} editTask={editTask} deleteTask={deleteTask}/>
