@@ -28,9 +28,6 @@ function Item(props) {
     //console.log(e.target.value);
   }
 
-    function handleChange(e) {
-      setNewName(e.target.value);
-    }
   
     function handleSubmit(e) {
       e.preventDefault();

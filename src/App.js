@@ -9,7 +9,7 @@ function App(props) {
   //const jobb = props.tasks.map(task =>{ return {...task, id: "teszt" + nanoid()}});
 
 
-  let maxId = 0;
+
 
   //const preparedData = props.tasks.map(function(task){ maxId++; return {...task, id: maxId}})
 
@@ -50,14 +50,23 @@ function App(props) {
     initializeData();*/
 
 
-
+    function findMaxCategoryPositionInCategory(category){
+      let maxCategoryPosition = 0;
+      tasks.map( task => {
+        if((task.category === category) && (task.categoryPos > maxCategoryPosition)){
+          maxCategoryPosition = task.categoryPos;
+        }
+        return task;
+      })
+      return maxCategoryPosition;
+    }
 
   function editTask(taskid, newName, newDescription, newDueDate, newCategory ){
     const editedTaskList = tasks.map(task => {
         if (taskid === task.id) {
-          console.log(taskid);
-          console.log(newName);
-          return {...task, name: newName, description : newDescription, dueDate : newDueDate, category : newCategory}
+          const currentMaxIDInCategory = findMaxCategoryPositionInCategory(newCategory);
+          let categoryPos = currentMaxIDInCategory + 1;
+          return {...task, name: newName, description : newDescription, dueDate : newDueDate, category : newCategory, categoryPos: categoryPos}
         }
         return task;
       });
@@ -79,7 +88,9 @@ function App(props) {
       console.log("utana" + maxId);*/
       const newID = maxID + 1;
       setMaxID(newID);
-      const newTask = {id: newID, name: name, description: description, dueDate: dueDate, category: category };
+      const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
+      let categoryPos = currentMaxIDInCategory + 1;
+      const newTask = {id: newID, name: name, description: description, dueDate: dueDate, category: category, categoryPos: categoryPos };
       
 
 
