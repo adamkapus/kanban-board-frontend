@@ -98,8 +98,8 @@ function App(props) {
 
   }
   return (
-    <div class="container-fluid " >
-      <h1>Teendő kezelő {tasks.length}</h1>
+    <div className="container-fluid " >
+      <h1 className="mb-4">Teendő kezelő </h1>
       <ActivityAdder addTask={addTask} />
       <CategoryManager tasks={tasks} editTask={editTask} deleteTask={deleteTask}/>
     </div>

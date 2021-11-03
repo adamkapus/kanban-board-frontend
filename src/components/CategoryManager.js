@@ -12,17 +12,17 @@ function CategoryManager(props) {
   const elhalasztvaLevoTaskok = props.tasks.filter(CATEGORIES_MAP["Elhalasztva"]).sort((firstEl, secondEl) =>  firstEl.categoryPos - secondEl.categoryPos );
 
   return (
-    <div class="row">
-        <div class="col" >
+    <div className="row">
+        <div className="col" >
           <Category name="Függőben" tasks={fuggobenLevoTaskok} editTask={props.editTask} deleteTask={props.deleteTask}/>
         </div>
-        <div class="col" >
+        <div className="col" >
           <Category name="Folyamatban" tasks={folyamatbanLevoTaskok} editTask={props.editTask} deleteTask={props.deleteTask}/>
         </div>
-        <div class="col" >
+        <div className="col" >
          <Category name="Kész" tasks={keszLevoTaskok} editTask={props.editTask} deleteTask={props.deleteTask}/>
         </div>
-        <div class="col" >
+        <div className="col" >
           <Category name="Elhalasztva" tasks={elhalasztvaLevoTaskok} editTask={props.editTask} deleteTask={props.deleteTask}/>
         </div>
     </div>

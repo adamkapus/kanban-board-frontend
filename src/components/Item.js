@@ -43,7 +43,7 @@ function Item(props) {
         <form  onSubmit={handleSubmit}>
   
     
-        <div class="mb-3 mx-3">
+        <div className="mb-3 mx-3 pt-3">
           <label  htmlFor="name" className="form-label">
             Név 
           </label>
@@ -56,7 +56,7 @@ function Item(props) {
           />
           </div>
           
-          <div class="mb-3 mx-3">
+          <div className="mb-3 mx-3">
           <label  htmlFor="description" className="form-label">
             Leírás
           </label>
@@ -72,7 +72,7 @@ function Item(props) {
         
           
     
-          <div class="mb-3 mx-3">
+          <div className="mb-3 mx-3">
           <label htmlFor="dueDate" className="form-label">
             Határidő
           </label>
@@ -85,7 +85,7 @@ function Item(props) {
           />
           </div>
     
-          <div class="mb-3 mx-3">
+          <div className="mb-3 mx-3">
           <label htmlFor="category" className="form-label">
             Kategória
           </label>
@@ -102,20 +102,21 @@ function Item(props) {
         
     
     
-        <div >
-        <button
-          type="button"
-          class="btn btn-primary"
-          onClick={() => setEditing(false)}
+          <div className ="mb-3 px-5 ">
+    <button
+      type="button"
+      className="btn btn-primary me-5  "
+      onClick={() => setEditing(false)}
+    >
+      Cancel
+    </button>
+      <button type="submit"
+       className="btn btn-primary ms-5 "
         >
-          Cancel
-        </button>
-          <button type="submit"
-           class="btn btn-primary"
-            >
-            Save
-          </button>
-        </div>
+        Save
+      </button>
+
+    </div>
       </form>
 
  
@@ -123,25 +124,30 @@ function Item(props) {
   );
   const viewTemplate = (
     <div >
-      <div className ="card-header text-center">
-        <h5 class="card-title"> {props.data.name}</h5>
-        <h6 class="card-subtitle text-muted">#{props.data.id}</h6>
-        </div> 
-        <p className="card-text" >{props.data.description}</p>
-        <p className="card-text" >{props.data.dueDate}</p>
+      <div className =" text-center">
+          <button type="button"
+            className="btn btn-light  position-absolute top-0 start-0"
+            onClick={() => setEditing(true)}>
+              <i className="fa fa-edit"></i> 
+            </button>
+          <button
+                type="button"
+                className="btn btn-light  position-absolute top-0 end-0"
+                onClick={() => props.deleteTask(props.data.id)}
+              >
+                <i className="fa fa-close"></i> 
+            </button>
+        <h5 className="card-title fw-bold"> {props.data.name}</h5>
+        <h6 className="card-subtitle text-muted">#{props.data.id}</h6>
+       
+        </div>
+        <div className="mx-3">
+        
+        <p className="card-text pt-3" >{props.data.description}</p>
+        <p className="card-text mb-3" >{props.data.dueDate}</p>
+        </div>
         <div>
-        <button type="button"
-        class="btn btn-primary"
-         onClick={() => setEditing(true)}>
-            Edit
-        </button>
-        <button
-            type="button"
-            class="btn btn-primary"
-            onClick={() => props.deleteTask(props.data.id)}
-          >
-            Delete 
-        </button>
+          
         </div>
     
 </div>

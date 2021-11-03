@@ -46,7 +46,7 @@ function ActivityAdder(props) {
   <form  onSubmit={handleSubmit}>
   
     
-    <div class="mb-3 mx-3">
+    <div className="mb-3 mx-3 pt-3">
       <label  htmlFor="name" className="form-label">
         Név 
       </label>
@@ -59,7 +59,7 @@ function ActivityAdder(props) {
       />
       </div>
       
-      <div class="mb-3 mx-3">
+      <div className="mb-3 mx-3">
       <label  htmlFor="description" className="form-label">
         Leírás
       </label>
@@ -75,7 +75,7 @@ function ActivityAdder(props) {
     
       
 
-      <div class="mb-3 mx-3">
+      <div className="mb-3 mx-3">
       <label htmlFor="dueDate" className="form-label">
         Határidő
       </label>
@@ -88,11 +88,11 @@ function ActivityAdder(props) {
       />
       </div>
 
-      <div class="mb-3 mx-3">
+      <div className="mb-3 mx-3">
       <label htmlFor="category" className="form-label">
         Kategória
       </label>
-      <select class="form-select" id="category" value={newCategory} onChange={onCategoryChanged}>
+      <select className="form-select" id="category" value={newCategory} onChange={onCategoryChanged}>
         <option value="Függőben">Függőben</option>
         <option value="Folyamatban">Folyamatban</option>
         <option value="Kész">Kész</option>
@@ -105,20 +105,22 @@ function ActivityAdder(props) {
     
 
 
-    <div >
+    <div className ="mb-3 px-5 ">
     <button
       type="button"
-      class="btn btn-primary"
+      className="btn btn-primary me-5  "
       onClick={() => setEditing(false)}
     >
       Cancel
     </button>
       <button type="submit"
-       class="btn btn-primary"
+       className="btn btn-primary ms-5 "
         >
         Save
       </button>
+
     </div>
+
   </form>
   </div>
   
@@ -135,7 +137,7 @@ const viewTemplate = (
 
 );
 
-  return ( <div class=" row justify-content-start"   > <div class="col-3">{isEditing ? editingTemplate : viewTemplate}</div> </div> );
+  return ( <div className=" row justify-content-start"   > <div className="col-3">{isEditing ? editingTemplate : viewTemplate}</div> </div> );
 
 
 
