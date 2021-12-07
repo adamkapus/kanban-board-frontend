@@ -9,7 +9,6 @@ function Category(props) {
     console.log(taskid);
     console.log(props.tasks);
     let indexOfTask = props.tasks.findIndex((task) => {return task.id === taskid});
-   //map(task => {if(task.id === taskid){indexOfTask=props.}})  
    if(indexOfTask === 0){
     //this task is already on the top
     console.log("kileptem ehello")

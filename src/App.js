@@ -6,9 +6,8 @@ import CategoryManager from "./components/CategoryManager";
 
 function App(props) {
   const backEndUrl = "http://localhost:5000/api/todoitems";
-  //const [backEndUrl, setBackEndUrl] = useState("http://localhost:5000/api/todoitems");
   const [tasks, setTasks] = useState(props.tasks);
-  //const [maxID, setMaxID] = useState(3);
+  
 
   async function postData(url = "", data = {}) {
     const response = await fetch(url, {
@@ -45,8 +44,6 @@ function App(props) {
         })
       )
       .then((res) => {
-        console.log("lekérés");
-        console.log(res);
         setTasks(res);
       });
   }, []);
@@ -60,24 +57,8 @@ function App(props) {
         })
       )
       .then((res) => {
-        console.log("fetch");
-        console.log(res);
         setTasks(res);
       });
-  }
-
-  function findMaxCategoryPositionInCategory(category) {
-    let maxCategoryPosition = 0;
-    tasks.map((task) => {
-      if (
-        task.category === category &&
-        task.categoryPos > maxCategoryPosition
-      ) {
-        maxCategoryPosition = task.categoryPos;
-      }
-      return task;
-    });
-    return maxCategoryPosition;
   }
 
   async function editTask(
@@ -87,35 +68,6 @@ function App(props) {
     newDueDate,
     newCategory
   ) {
-    /*const editedTaskList = await tasks.map((task) => {
-      if (taskid === task.id) {
-        let categoryPos = task.categoryPos;
-        if (newCategory !== task.category) {
-          const currentMaxIDInCategory =
-            findMaxCategoryPositionInCategory(newCategory);
-          categoryPos = currentMaxIDInCategory + 1;
-        }
-        const edited = {
-          ...task,
-          name: newName,
-          description: newDescription,
-          dueDate: newDueDate,
-          category: newCategory,
-          //categoryPos: categoryPos,
-        };
-        putData(backEndUrl + "/" + task.id, edited);
-
-        return {
-          ...task,
-          name: newName,
-          description: newDescription,
-          dueDate: newDueDate,
-          category: newCategory,
-          //categoryPos: categoryPos,
-        };
-      }
-      return task;
-    });*/
 
     const edited = {
       id :taskid,
@@ -123,12 +75,9 @@ function App(props) {
       description: newDescription,
       dueDate: newDueDate,
       category: newCategory,
-      //categoryPos: categoryPos,
     };
     await putData(backEndUrl + "/" + taskid, edited);
     await fetchAllTasks();
-    //setTasks(editedTaskList);
-    //console.log(tasks);
   }
 
   async function deleteTask(taskid) {
@@ -141,14 +90,12 @@ function App(props) {
   }
 
   async function addTask(name, description, dueDate, category) {
-    //const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
-    //let categoryPos = currentMaxIDInCategory + 1;
     let newTask = {
       name: name,
       description: description,
       dueDate: dueDate,
       category: category,
-      //categoryPos: categoryPos,
+      
     };
 
     let createdTask = await postData(backEndUrl, newTask);
@@ -158,40 +105,8 @@ function App(props) {
   }
 
 
-  /*async function moveUpTask(taskid) {
-    const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
-    let categoryPos = currentMaxIDInCategory + 1;
-    let newTask = {
-      name: name,
-      description: description,
-      dueDate: dueDate,
-      category: category,
-      categoryPos: categoryPos,
-    };
-
-    let createdTask = await postData(backEndUrl, newTask);
-    createdTask = convertDueDate(createdTask);
-
-    setTasks([...tasks, createdTask]);
-  }*/
 
   async function moveTask(toBeMovedHigherTaskId, toBeMovedLowerTaskId) {
-    console.log("eztfeljebb"+toBeMovedHigherTaskId);
-    console.log("eztlejjebb"+toBeMovedLowerTaskId);
-    /*const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
-    let categoryPos = currentMaxIDInCategory + 1;
-    let newTask = {
-      name: name,
-      description: description,
-      dueDate: dueDate,
-      category: category,
-      categoryPos: categoryPos,
-    };
-
-    let createdTask = await postData(backEndUrl, newTask);
-    createdTask = convertDueDate(createdTask);
-
-    setTasks([...tasks, createdTask]);*/
     const url = backEndUrl + "/" + "?" + "firstId=" + toBeMovedHigherTaskId + "&" + "secondId=" + toBeMovedLowerTaskId;
     await fetch(url, {
       method: "PUT"

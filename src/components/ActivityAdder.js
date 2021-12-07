@@ -10,33 +10,26 @@ function ActivityAdder(props) {
 
   function onNameChanged(e) {
     setNewName(e.target.value);
-    //console.log(e.target.value);
+    
   }
   function onDescriptionChanged(e) {
     setNewDescription(e.target.value);
-    //setNewName(e.target.value);
-    //console.log(e.target.value);
   }
   function onDueDateChanged(e) {
     setnewDueDate(e.target.value);
-    //console.log(e.target.value);
   }
   function onCategoryChanged(e) {
     setnewCategory(e.target.value);
-    //console.log(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    //props.editTask(props.data.id, newName);
     props.addTask(newName, newDescription, newDueDate, newCategory);
     console.log(newDueDate);
     setNewName("");
     setNewDescription("");
     setnewDueDate("");
     setEditing(false);
-    //console.log(newName);
-    // setNewName("");
   }
 
   const editingTemplate = (

@@ -3,10 +3,9 @@ import Category from "./Category";
 import { CATEGORIES_MAP } from "../utils/CategoryHandle.js";
 
 function CategoryManager(props) {
-  let fuggobenLevoTaskok = props.tasks
+  const fuggobenLevoTaskok = props.tasks
     .filter(CATEGORIES_MAP["Függőben"])
     .sort((firstEl, secondEl) => firstEl.categoryPos - secondEl.categoryPos);
-  //let rendezett = fuggobenLevoTaskok.sort((firstEl, secondEl) =>  firstEl.categoryPos - secondEl.categoryPos );//.map(task => <Category name="Függőben" tasks={fuggoben}  />);
   const folyamatbanLevoTaskok = props.tasks
     .filter(CATEGORIES_MAP["Folyamatban"])
     .sort((firstEl, secondEl) => firstEl.categoryPos - secondEl.categoryPos);

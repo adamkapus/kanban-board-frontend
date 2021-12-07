@@ -1,31 +1,24 @@
 import React, { useState } from "react";
 
 function Item(props) {
-  //const [data, setData] = useState(props.data);
   const [isEditing, setEditing] = useState(false);
   const [newName, setNewName] = useState(props.data.name);
   const [newDescription, setNewDescription] = useState(props.data.description);
   const [newDueDate, setnewDueDate] = useState(props.data.dueDate);
   const [newCategory, setnewCategory] = useState(props.data.category);
 
-  //const 
 
   function onNameChanged(e) {
     setNewName(e.target.value);
-    //console.log(e.target.value);
   }
   function onDescriptionChanged(e) {
     setNewDescription(e.target.value);
-    //setNewName(e.target.value);
-    //console.log(e.target.value);
   }
   function onDueDateChanged(e) {
     setnewDueDate(e.target.value);
-    //console.log(e.target.value);
   }
   function onCategoryChanged(e) {
-    setnewCategory(e.target.value);
-    //console.log(e.target.value);
+    setnewCategory(e.target.value);  
   }
 
   function handleSubmit(e) {
@@ -37,9 +30,6 @@ function Item(props) {
       newDueDate,
       newCategory
     );
-    //console.log(newName);
-    //setNewName('');
-    ////setnewDueDate('');
     setEditing(false);
   }
 
