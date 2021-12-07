@@ -6,20 +6,15 @@ function Category(props) {
 
 
   function MoveHigherTask(taskid){
-    console.log(taskid);
-    console.log(props.tasks);
     let indexOfTask = props.tasks.findIndex((task) => {return task.id === taskid});
    if(indexOfTask === 0){
-    //this task is already on the top
-    console.log("kileptem ehello")
+    //this task is already at the top
     return;
    }
    
     let indexOfAboveTask = indexOfTask -1;
     let taskIdOfCurrentlyAbove = props.tasks[indexOfAboveTask].id;
 
-    console.log("currentindex"+indexOfTask);
-    console.log("above"+taskIdOfCurrentlyAbove);
 
     props.moveTask(taskid, taskIdOfCurrentlyAbove);
    
@@ -32,15 +27,12 @@ function MoveLowerTask(taskid){
 
   if( (indexOfTask === props.tasks.length-1)){
     //this task is already on the bottom
-    console.log("kileptem ehello")
     return;
    }
 
    let indexOfBelowTask = indexOfTask +1;
     let taskIdOfCurrentlyBelow = props.tasks[indexOfBelowTask].id;
 
-    console.log("currentindex"+indexOfTask);
-    console.log("below"+taskIdOfCurrentlyBelow);
 
     props.moveTask(taskIdOfCurrentlyBelow, taskid);
 
