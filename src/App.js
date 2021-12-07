@@ -1,22 +1,17 @@
 import "./App.css";
 import React, { useState } from "react";
+import  { useEffect } from "react";
 import ActivityAdder from "./components/ActivityAdder.js";
 import CategoryManager from "./components/CategoryManager";
-import { nanoid } from "nanoid";
 
 function App(props) {
-  //const jobb = props.tasks.map(task =>{ return {...task, id: "teszt" + nanoid()}});
 
-  //const preparedData = props.tasks.map(function(task){ maxId++; return {...task, id: maxId}})
-
+  const backEndUrl = "http://localhost:5000/api/todoitems";
+  //const [backEndUrl, setBackEndUrl] = useState("http://localhost:5000/api/todoitems");
   const [tasks, setTasks] = useState(props.tasks);
-  const [maxID, setMaxID] = useState(3);
+  //const [maxID, setMaxID] = useState(3);
 
-  /*let adat = {
-    id: 3,
-    name: "ujnve",
-  };*/
-  /*async function postData(url = "", data = {}) {
+  async function postData(url = "", data = {}) {
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -24,25 +19,32 @@ function App(props) {
       },
       body: JSON.stringify(data),
     });
-    return response;
-  }*/
+    return response.json();
+  }
 
-  /*let response =  postData(
-    " http://localhost:3100/customers",
-    adat
-  );
-  console.log(response);*/
+  async function putData(url = "", data = {}) {
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  }
 
-  /*function initializeData(){
+  function convertDueDate(task){
+      task.dueDate = task.dueDate.slice(0,10);
+      return task;
+  }
+
+
+
+    useEffect(() => {
       fetch(
-        "http://localhost:3100/tasks"
+        "http://localhost:5000/api/todoitems"
       ).then(res => res.json())
-      .then( res => {setTasks(res)});
-      //const tasksData =  request.json();
-      //console.log(tasksData);
-      
-    }
-    initializeData();*/
+      .then(res => res.map( task => {return convertDueDate(task)})).then( res => {console.log("lekérés");console.log(res); setTasks(res)});
+    }, []);
 
   function findMaxCategoryPositionInCategory(category) {
     let maxCategoryPosition = 0;
@@ -58,12 +60,25 @@ function App(props) {
     return maxCategoryPosition;
   }
 
-  function editTask(taskid, newName, newDescription, newDueDate, newCategory) {
-    const editedTaskList = tasks.map((task) => {
+  async function editTask(taskid, newName, newDescription, newDueDate, newCategory) {
+    const editedTaskList = await tasks.map((task) => {
       if (taskid === task.id) {
-        const currentMaxIDInCategory =
+        let categoryPos = task.categoryPos;
+        if(newCategory !== task.category){
+          const currentMaxIDInCategory =
           findMaxCategoryPositionInCategory(newCategory);
-        let categoryPos = currentMaxIDInCategory + 1;
+          categoryPos = currentMaxIDInCategory + 1;
+        }
+        const edited = {
+          ...task,
+          name: newName,
+          description: newDescription,
+          dueDate: newDueDate,
+          category: newCategory,
+          categoryPos: categoryPos,
+        }
+         putData(backEndUrl+"/"+task.id,edited);
+
         return {
           ...task,
           name: newName,
@@ -76,24 +91,22 @@ function App(props) {
       return task;
     });
     setTasks(editedTaskList);
-    console.log(tasks);
+    //console.log(tasks);
   }
 
-  function deleteTask(taskid) {
+  async function deleteTask(taskid) {
+    await fetch(backEndUrl+"/"+taskid, {
+      method: "DELETE",
+    });
+
     const remainingTasks = tasks.filter((task) => taskid !== task.id);
     setTasks(remainingTasks);
   }
 
-  function addTask(name, description, dueDate, category) {
-    /*console.log("elotte" + maxId);
-      maxId = pls();
-      console.log("utana" + maxId);*/
-    const newID = maxID + 1;
-    setMaxID(newID);
+  async function addTask(name, description, dueDate, category) {
     const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
     let categoryPos = currentMaxIDInCategory + 1;
-    const newTask = {
-      id: newID,
+    let newTask = {
       name: name,
       description: description,
       dueDate: dueDate,
@@ -101,7 +114,10 @@ function App(props) {
       categoryPos: categoryPos,
     };
 
-    setTasks([...tasks, newTask]);
+    let createdTask = await postData(backEndUrl,newTask);
+    createdTask = convertDueDate(createdTask);
+   
+    setTasks([...tasks, createdTask]);
   }
   return (
     <div className="container-fluid ">

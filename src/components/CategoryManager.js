@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import Category from "./Category";
-import { CATEGORIES_MAP as CATEGORIES_MAP } from "../utils/CategoryHandle.js";
+import { CATEGORIES_MAP } from "../utils/CategoryHandle.js";
 
 function CategoryManager(props) {
   let fuggobenLevoTaskok = props.tasks

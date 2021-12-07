@@ -30,6 +30,7 @@ function ActivityAdder(props) {
     e.preventDefault();
     //props.editTask(props.data.id, newName);
     props.addTask(newName, newDescription, newDueDate, newCategory);
+    console.log(newDueDate);
     setNewName("");
     setNewDescription("");
     setnewDueDate("");
@@ -73,10 +74,11 @@ function ActivityAdder(props) {
           </label>
           <input
             id="dueDate"
-            type="text"
+            type="date"
             className="form-control"
             value={newDueDate}
             onChange={onDueDateChanged}
+            required
           />
         </div>
 
