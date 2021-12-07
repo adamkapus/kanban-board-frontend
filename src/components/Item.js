@@ -8,6 +8,8 @@ function Item(props) {
   const [newDueDate, setnewDueDate] = useState(props.data.dueDate);
   const [newCategory, setnewCategory] = useState(props.data.category);
 
+  //const 
+
   function onNameChanged(e) {
     setNewName(e.target.value);
     //console.log(e.target.value);
@@ -137,8 +139,25 @@ function Item(props) {
       <div className="mx-3">
         <p className="card-text pt-3">{props.data.description}</p>
         <p className="card-text mb-3">{props.data.dueDate}</p>
+        <p className="card-text mb-3">{props.data.id}</p>
       </div>
-      <div></div>
+      <div>
+      <button
+          type="button"
+          className="btn btn-light "
+          onClick={() => props.moveHigherTask(props.data.id)}
+        >
+          <i className="fa fa-arrow-up" style={{ color: "black" }}></i>
+        </button>
+        <button
+          type="button"
+          className="btn btn-light "
+          onClick={() => props.moveLowerTask(props.data.id)}
+        >
+          <i className="fa fa-arrow-down" style={{ color: "black" }}></i>
+        </button>
+        
+      </div>
     </div>
   );
 

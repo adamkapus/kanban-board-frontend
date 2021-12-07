@@ -51,6 +51,21 @@ function App(props) {
       });
   }, []);
 
+  function fetchAllTasks(){
+    fetch("http://localhost:5000/api/todoitems")
+      .then((res) => res.json())
+      .then((res) =>
+        res.map((task) => {
+          return convertDueDate(task);
+        })
+      )
+      .then((res) => {
+        console.log("fetch");
+        console.log(res);
+        setTasks(res);
+      });
+  }
+
   function findMaxCategoryPositionInCategory(category) {
     let maxCategoryPosition = 0;
     tasks.map((task) => {
@@ -72,7 +87,7 @@ function App(props) {
     newDueDate,
     newCategory
   ) {
-    const editedTaskList = await tasks.map((task) => {
+    /*const editedTaskList = await tasks.map((task) => {
       if (taskid === task.id) {
         let categoryPos = task.categoryPos;
         if (newCategory !== task.category) {
@@ -86,7 +101,7 @@ function App(props) {
           description: newDescription,
           dueDate: newDueDate,
           category: newCategory,
-          categoryPos: categoryPos,
+          //categoryPos: categoryPos,
         };
         putData(backEndUrl + "/" + task.id, edited);
 
@@ -96,12 +111,23 @@ function App(props) {
           description: newDescription,
           dueDate: newDueDate,
           category: newCategory,
-          categoryPos: categoryPos,
+          //categoryPos: categoryPos,
         };
       }
       return task;
-    });
-    setTasks(editedTaskList);
+    });*/
+
+    const edited = {
+      id :taskid,
+      name: newName,
+      description: newDescription,
+      dueDate: newDueDate,
+      category: newCategory,
+      //categoryPos: categoryPos,
+    };
+    await putData(backEndUrl + "/" + taskid, edited);
+    await fetchAllTasks();
+    //setTasks(editedTaskList);
     //console.log(tasks);
   }
 
@@ -115,6 +141,24 @@ function App(props) {
   }
 
   async function addTask(name, description, dueDate, category) {
+    //const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
+    //let categoryPos = currentMaxIDInCategory + 1;
+    let newTask = {
+      name: name,
+      description: description,
+      dueDate: dueDate,
+      category: category,
+      //categoryPos: categoryPos,
+    };
+
+    let createdTask = await postData(backEndUrl, newTask);
+    createdTask = convertDueDate(createdTask);
+
+    setTasks([...tasks, createdTask]);
+  }
+
+
+  /*async function moveUpTask(taskid) {
     const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
     let categoryPos = currentMaxIDInCategory + 1;
     let newTask = {
@@ -129,7 +173,34 @@ function App(props) {
     createdTask = convertDueDate(createdTask);
 
     setTasks([...tasks, createdTask]);
+  }*/
+
+  async function moveTask(toBeMovedHigherTaskId, toBeMovedLowerTaskId) {
+    console.log("eztfeljebb"+toBeMovedHigherTaskId);
+    console.log("eztlejjebb"+toBeMovedLowerTaskId);
+    /*const currentMaxIDInCategory = findMaxCategoryPositionInCategory(category);
+    let categoryPos = currentMaxIDInCategory + 1;
+    let newTask = {
+      name: name,
+      description: description,
+      dueDate: dueDate,
+      category: category,
+      categoryPos: categoryPos,
+    };
+
+    let createdTask = await postData(backEndUrl, newTask);
+    createdTask = convertDueDate(createdTask);
+
+    setTasks([...tasks, createdTask]);*/
+    const url = backEndUrl + "/" + "?" + "firstId=" + toBeMovedHigherTaskId + "&" + "secondId=" + toBeMovedLowerTaskId;
+    await fetch(url, {
+      method: "PUT"
+    });
+    await fetchAllTasks();
+
   }
+
+
   return (
     <div className="container-fluid ">
       <h1 className="mb-4">Teendő kezelő </h1>
@@ -138,6 +209,7 @@ function App(props) {
         tasks={tasks}
         editTask={editTask}
         deleteTask={deleteTask}
+        moveTask={moveTask}
       />
     </div>
   );

@@ -25,6 +25,7 @@ function CategoryManager(props) {
           tasks={fuggobenLevoTaskok}
           editTask={props.editTask}
           deleteTask={props.deleteTask}
+          moveTask={props.moveTask}
         />
       </div>
       <div className="col">
@@ -33,6 +34,7 @@ function CategoryManager(props) {
           tasks={folyamatbanLevoTaskok}
           editTask={props.editTask}
           deleteTask={props.deleteTask}
+          moveTask={props.moveTask}
         />
       </div>
       <div className="col">
@@ -41,6 +43,7 @@ function CategoryManager(props) {
           tasks={keszLevoTaskok}
           editTask={props.editTask}
           deleteTask={props.deleteTask}
+          moveTask={props.moveTask}
         />
       </div>
       <div className="col">
@@ -49,6 +52,7 @@ function CategoryManager(props) {
           tasks={elhalasztvaLevoTaskok}
           editTask={props.editTask}
           deleteTask={props.deleteTask}
+          moveTask={props.moveTask}
         />
       </div>
     </div>
