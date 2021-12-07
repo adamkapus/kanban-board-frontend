@@ -122,14 +122,14 @@ function Item(props) {
           className="btn btn-light  position-absolute top-0 start-0"
           onClick={() => setEditing(true)}
         >
-          <i className="fa fa-edit"style={{color: 'darkgreen' }}></i>
+          <i className="fa fa-edit" style={{ color: "darkgreen" }}></i>
         </button>
         <button
           type="button"
           className="btn btn-light  position-absolute top-0 end-0"
           onClick={() => props.deleteTask(props.data.id)}
         >
-          <i className="fa fa-close" style={{color: 'darkred' }}></i>
+          <i className="fa fa-close" style={{ color: "darkred" }}></i>
         </button>
         <h5 className="card-title fw-bold"> {props.data.name}</h5>
         <h6 className="card-subtitle text-muted">#{props.data.id}</h6>

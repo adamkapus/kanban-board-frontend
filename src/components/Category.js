@@ -1,7 +1,6 @@
 import Item from "./Item";
 
 function Category(props) {
-
   return (
     <div>
       <h1 className="text-center mb-3">

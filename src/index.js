@@ -6,13 +6,13 @@ import App from "./App";
 
 const DATA = [
   {
-    "id": 0,
-    "name": "foo",
-    "description": null,
-    "dueDate": null,
-    "category": null,
-    "categoryPos": 0
-}
+    id: 0,
+    name: "foo",
+    description: null,
+    dueDate: null,
+    category: null,
+    categoryPos: 0,
+  },
 ];
 
 ReactDOM.render(

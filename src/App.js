@@ -1,11 +1,10 @@
 import "./App.css";
 import React, { useState } from "react";
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import ActivityAdder from "./components/ActivityAdder.js";
 import CategoryManager from "./components/CategoryManager";
 
 function App(props) {
-
   const backEndUrl = "http://localhost:5000/api/todoitems";
   //const [backEndUrl, setBackEndUrl] = useState("http://localhost:5000/api/todoitems");
   const [tasks, setTasks] = useState(props.tasks);
@@ -32,19 +31,25 @@ function App(props) {
     });
   }
 
-  function convertDueDate(task){
-      task.dueDate = task.dueDate.slice(0,10);
-      return task;
+  function convertDueDate(task) {
+    task.dueDate = task.dueDate.slice(0, 10);
+    return task;
   }
 
-
-
-    useEffect(() => {
-      fetch(
-        "http://localhost:5000/api/todoitems"
-      ).then(res => res.json())
-      .then(res => res.map( task => {return convertDueDate(task)})).then( res => {console.log("lekérés");console.log(res); setTasks(res)});
-    }, []);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/todoitems")
+      .then((res) => res.json())
+      .then((res) =>
+        res.map((task) => {
+          return convertDueDate(task);
+        })
+      )
+      .then((res) => {
+        console.log("lekérés");
+        console.log(res);
+        setTasks(res);
+      });
+  }, []);
 
   function findMaxCategoryPositionInCategory(category) {
     let maxCategoryPosition = 0;
@@ -60,13 +65,19 @@ function App(props) {
     return maxCategoryPosition;
   }
 
-  async function editTask(taskid, newName, newDescription, newDueDate, newCategory) {
+  async function editTask(
+    taskid,
+    newName,
+    newDescription,
+    newDueDate,
+    newCategory
+  ) {
     const editedTaskList = await tasks.map((task) => {
       if (taskid === task.id) {
         let categoryPos = task.categoryPos;
-        if(newCategory !== task.category){
+        if (newCategory !== task.category) {
           const currentMaxIDInCategory =
-          findMaxCategoryPositionInCategory(newCategory);
+            findMaxCategoryPositionInCategory(newCategory);
           categoryPos = currentMaxIDInCategory + 1;
         }
         const edited = {
@@ -76,8 +87,8 @@ function App(props) {
           dueDate: newDueDate,
           category: newCategory,
           categoryPos: categoryPos,
-        }
-         putData(backEndUrl+"/"+task.id,edited);
+        };
+        putData(backEndUrl + "/" + task.id, edited);
 
         return {
           ...task,
@@ -91,11 +102,11 @@ function App(props) {
       return task;
     });
     setTasks(editedTaskList);
-    //console.log(tasks);
+    ///console.log(tasks);
   }
 
   async function deleteTask(taskid) {
-    await fetch(backEndUrl+"/"+taskid, {
+    await fetch(backEndUrl + "/" + taskid, {
       method: "DELETE",
     });
 
@@ -114,9 +125,9 @@ function App(props) {
       categoryPos: categoryPos,
     };
 
-    let createdTask = await postData(backEndUrl,newTask);
+    let createdTask = await postData(backEndUrl, newTask);
     createdTask = convertDueDate(createdTask);
-   
+
     setTasks([...tasks, createdTask]);
   }
   return (
