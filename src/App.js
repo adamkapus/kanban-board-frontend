@@ -102,7 +102,7 @@ function App(props) {
       return task;
     });
     setTasks(editedTaskList);
-    ///console.log(tasks);
+    //console.log(tasks);
   }
 
   async function deleteTask(taskid) {
