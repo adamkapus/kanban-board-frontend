@@ -1,8 +1,10 @@
 import "./App.css";
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import { useEffect } from "react";
 import ActivityAdder from "./components/ActivityAdder.js";
 import CategoryManager from "./components/CategoryManager";
+
 
 function App(props) {
   const backEndUrl = "http://localhost:5000/api/todoitems";
@@ -129,5 +131,14 @@ function App(props) {
     </div>
   );
 }
+
+App.propTypes = {
+  tasks: PropTypes.arrayOf({id : PropTypes.number, name: PropTypes.string,
+  description: PropTypes.string,
+  dueDate: PropTypes.string,
+  category: PropTypes.string,
+  categoryPos: PropTypes.number})
+};
+
 
 export default App;
