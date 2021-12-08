@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 function ActivityAdder(props) {
   const [isEditing, setEditing] = useState(false);
@@ -128,5 +129,10 @@ function ActivityAdder(props) {
     </div>
   );
 }
+
+
+ActivityAdder.propTypes = {
+  addTask: PropTypes.func
+};
 
 export default ActivityAdder;

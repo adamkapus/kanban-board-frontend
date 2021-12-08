@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 function Item(props) {
   const [isEditing, setEditing] = useState(false);
@@ -157,5 +158,18 @@ function Item(props) {
     </div>
   );
 }
+
+Item.propTypes = {
+  key : PropTypes.number,
+  data: {id : PropTypes.number, name: PropTypes.string,
+    description: PropTypes.string,
+    dueDate: PropTypes.string,
+    category: PropTypes.string,
+    categoryPos: PropTypes.number},
+  editTask : PropTypes.func,
+  deleteTask : PropTypes.func,
+  moveHigherTask: PropTypes.func,
+  moveLowerTask: PropTypes.func
+};
 
 export default Item;
