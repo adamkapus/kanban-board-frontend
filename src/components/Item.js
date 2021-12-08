@@ -160,12 +160,12 @@ function Item(props) {
 }
 
 Item.propTypes = {
-  key : PropTypes.number,
-  data: {id : PropTypes.number, name: PropTypes.string,
+  //key : PropTypes.number,
+  data: PropTypes.shape({id : PropTypes.number, name: PropTypes.string,
     description: PropTypes.string,
     dueDate: PropTypes.string,
     category: PropTypes.string,
-    categoryPos: PropTypes.number},
+    categoryPos: PropTypes.number}),
   editTask : PropTypes.func,
   deleteTask : PropTypes.func,
   moveHigherTask: PropTypes.func,

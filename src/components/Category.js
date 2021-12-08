@@ -63,11 +63,11 @@ function MoveLowerTask(taskid){
 
 Category.propTypes = {
   name : PropTypes.string,
-  tasks: PropTypes.arrayOf({id : PropTypes.number, name: PropTypes.string,
+  tasks: PropTypes.arrayOf(PropTypes.shape({id : PropTypes.number, name: PropTypes.string,
   description: PropTypes.string,
   dueDate: PropTypes.string,
   category: PropTypes.string,
-  categoryPos: PropTypes.number}),
+  categoryPos: PropTypes.number})),
   editTask : PropTypes.func,
   deleteTask : PropTypes.func,
   moveTask: PropTypes.func

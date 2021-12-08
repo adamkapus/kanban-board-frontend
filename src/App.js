@@ -133,11 +133,11 @@ function App(props) {
 }
 
 App.propTypes = {
-  tasks: PropTypes.arrayOf({id : PropTypes.number, name: PropTypes.string,
+  tasks: PropTypes.arrayOf(PropTypes.shape({id : PropTypes.number, name: PropTypes.string,
   description: PropTypes.string,
   dueDate: PropTypes.string,
   category: PropTypes.string,
-  categoryPos: PropTypes.number})
+  categoryPos: PropTypes.number}))
 };
 
 
