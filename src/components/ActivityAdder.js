@@ -26,7 +26,6 @@ function ActivityAdder(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.addTask(newName, newDescription, newDueDate, newCategory);
-    console.log(newDueDate);
     setNewName("");
     setNewDescription("");
     setnewDueDate("");

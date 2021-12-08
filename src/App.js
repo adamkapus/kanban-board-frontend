@@ -38,20 +38,11 @@ function App(props) {
   }
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/todoitems")
-      .then((res) => res.json())
-      .then((res) =>
-        res.map((task) => {
-          return convertDueDate(task);
-        })
-      )
-      .then((res) => {
-        setTasks(res);
-      });
+   fetchAllTasks();
   }, []);
 
   function fetchAllTasks(){
-    fetch("http://localhost:5000/api/todoitems")
+    fetch(backEndUrl)
       .then((res) => res.json())
       .then((res) =>
         res.map((task) => {
