@@ -2,7 +2,7 @@
 
 ## Leírás
 
-Az alkalmazás egy Teendőnyilvántartó alkalmazást valósít meg. Egy teendőnek van neve, leírása, és határideje. A teendők 4 kategória egyikébe sorolhatóak be: függőben, folyamatban, kész, elhalasztva. A felhasználó megadhat teendőket az "Új feladat felvétele" gomb segítségével. A hozzáadott teendők permanensen elmentődnek, a weboldalt később megnyitva ismét láthatóak. A hozzáadott teendők minden adata szerkeszthető, valamint a teendők törölhetőek is, ezek a változtatások szintén permanensen elmentődnek.
+Az alkalmazás egy Teendőnyilvántartó alkalmazást valósít meg. Egy teendőnek van neve, leírása, és határideje. A teendők 4 kategória egyikébe sorolhatóak be: függőben, folyamatban, kész, elhalasztva. A felhasználó megadhat teendőket az "Új feladat felvétele" gomb segítségével. A hozzáadott teendők permanensen elmentődnek, a weboldalt később megnyitva ismét láthatóak. A hozzáadott teendők minden adata szerkeszthető, valamint a teendők törölhetőek is, ezek a változtatások szintén permanensen elmentődnek. Egy teendő prioritása a kategóriáján belül szintén változtatható.
 
 ## Beüzemelés
 
@@ -14,7 +14,7 @@ Optimalizát build készíthető az `npm run build` parancs kiadásával, ami eg
 
 A szoftver ReactJS technológiát használ az oldal kirenderelésére, és BootstrapCSS-t a stílusokhoz. A React komponensek külön fájlokba vannak szervezve.
 
-A komponensek hierarchiájában a gyökérelem az App komponens. Ez a komponens felel a backenddel való kommunikációért: a teendők lekérdezésért, egy teendő új teendő létrehozásáért az adatbázisban, egy meglévő teendő módosításáért illetve egy teendő törléséért. A komponens state-ben tárolja az összes teendőt. A komponens kirenderelésében található egy ActivityAdder és egy CategoryManager. Ha megváltozik az App-ban tárolt teendők listája, akkor az összes teendő újra kirenderelődik, mivel a CategoryManager propként kapja azokat.
+A komponensek hierarchiájában a gyökérelem az App komponens. Ez a komponens felel a backenddel való kommunikációért: a teendők lekérdezésért, egy teendő új teendő létrehozásáért az adatbázisban, egy meglévő teendő módosításáért, két teendő kategórián belüli pozíciójának megcserélésért, illetve egy teendő törléséért. A komponens state-ben tárolja az összes teendőt. A komponens kirenderelésében található egy ActivityAdder és egy CategoryManager. Ha megváltozik az App-ban tárolt teendők listája, akkor az összes teendő újra kirenderelődik, mivel a CategoryManager propként kapja azokat.
 
 Az ActivityAdder komponens felel egy új teendő hozzáadásához szükséges felületért. Prop-ként kap egy callback függvényt az őt tartalmazó App-től, amin keresztül megadhat egy új teendőt az Appnak.
 
